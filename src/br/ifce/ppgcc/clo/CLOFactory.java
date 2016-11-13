@@ -44,7 +44,6 @@ public class CLOFactory {
     	cloId = gerarCLOId();
     	String cloTitle = "CLO " + cloId;
     	String cloFileName = cloTitle + ".zip";
-    	String cloQualifiedName = "clo_" + cloId;
     	
     	System.out.println("### Nome CLO: " + cloFileName + " ###");
     	
@@ -53,7 +52,7 @@ public class CLOFactory {
         int index;
     	
     	//Cria o LOM.json
-    	JSONObject lomJson = gerarLOMJson(cloTitle, cloQualifiedName);
+    	JSONObject lomJson = gerarLOMJson(cloTitle);
     	PrintWriter lomFile = new PrintWriter(DIRECTORY_NAME + "/temp/LOM.json", "UTF-8");
     	lomFile.write(lomJson.toString());
     	lomFile.close();
@@ -193,7 +192,7 @@ public class CLOFactory {
     	return (int) (Math.random() * 1000);
     }
     
-    private static JSONObject gerarLOMJson(String title, String qualified_name) {
+    private static JSONObject gerarLOMJson(String title) {
     	JSONObject lomJson = new JSONObject();
     	
     	//Title
@@ -201,10 +200,7 @@ public class CLOFactory {
     	titleJson.put("language", LOREM_IPSUM.getWords(1));
     	titleJson.put("value", title);
     	lomJson.put("title", titleJson);
-    	
-    	//Qualified Name
-    	lomJson.put("qualified_name", qualified_name);
-    	
+    	    	
     	//Languages
     	JSONArray languagesJson = new JSONArray();
     	int qtdLanguages =  (int) (Math.random() * 10);
